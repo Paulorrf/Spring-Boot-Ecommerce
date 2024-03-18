@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,10 +18,15 @@ public class Review {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    private Product product;
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    //personal rating for a product
     private Double rating;
 
     private String comment;
@@ -34,20 +41,20 @@ public class Review {
         this.id = id;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Double getRating() {
@@ -79,8 +86,8 @@ public class Review {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((product == null) ? 0 : product.hashCode());
         result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = prime * result + ((product == null) ? 0 : product.hashCode());
         result = prime * result + ((rating == null) ? 0 : rating.hashCode());
         result = prime * result + ((comment == null) ? 0 : comment.hashCode());
         result = prime * result + ((review_date == null) ? 0 : review_date.hashCode());
@@ -101,15 +108,15 @@ public class Review {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (product == null) {
-            if (other.product != null)
-                return false;
-        } else if (!product.equals(other.product))
-            return false;
         if (user == null) {
             if (other.user != null)
                 return false;
         } else if (!user.equals(other.user))
+            return false;
+        if (product == null) {
+            if (other.product != null)
+                return false;
+        } else if (!product.equals(other.product))
             return false;
         if (rating == null) {
             if (other.rating != null)
@@ -128,6 +135,10 @@ public class Review {
             return false;
         return true;
     }
+
+    
+
+  
 
     
 }

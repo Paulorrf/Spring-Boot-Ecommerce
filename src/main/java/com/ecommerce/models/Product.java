@@ -1,9 +1,13 @@
 package com.ecommerce.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -15,20 +19,24 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
     private String description;
 
+    @Column(nullable = false)
     private Double price;
 
+    @Column(nullable = false)
     private Integer quantity;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
     private String image;
-
-    private Review review;
     
+    //overall product rate
     private Double rating;
 
     public Long getId() {
@@ -87,14 +95,6 @@ public class Product {
         this.image = image;
     }
 
-    public Review getReview() {
-        return review;
-    }
-
-    public void setReview(Review review) {
-        this.review = review;
-    }
-
     public Double getRating() {
         return rating;
     }
@@ -114,7 +114,6 @@ public class Product {
         result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
         result = prime * result + ((category == null) ? 0 : category.hashCode());
         result = prime * result + ((image == null) ? 0 : image.hashCode());
-        result = prime * result + ((review == null) ? 0 : review.hashCode());
         result = prime * result + ((rating == null) ? 0 : rating.hashCode());
         return result;
     }
@@ -163,11 +162,6 @@ public class Product {
                 return false;
         } else if (!image.equals(other.image))
             return false;
-        if (review == null) {
-            if (other.review != null)
-                return false;
-        } else if (!review.equals(other.review))
-            return false;
         if (rating == null) {
             if (other.rating != null)
                 return false;
@@ -175,4 +169,6 @@ public class Product {
             return false;
         return true;
     }
+
+    
 }

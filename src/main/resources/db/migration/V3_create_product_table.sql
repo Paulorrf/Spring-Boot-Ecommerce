@@ -4,9 +4,9 @@ CREATE TABLE product (
     description TEXT,
     price NUMERIC(10, 2) NOT NULL,
     quantity INTEGER NOT NULL,
-    category_id BIGINT,
+    category_id INT,
     image VARCHAR(255),
-    review_id BIGINT,
+    review_id INT,
     rating NUMERIC(3, 2),
     FOREIGN KEY (category_id) REFERENCES category(id),
     FOREIGN KEY (review_id) REFERENCES review(id)

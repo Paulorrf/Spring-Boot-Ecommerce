@@ -1,10 +1,9 @@
 CREATE TABLE review (
     id SERIAL PRIMARY KEY,
-    product_id BIGINT,
-    user_id BIGINT,
+    product_id INT,
+    user_id INT,
     rating NUMERIC(3, 2),
     comment TEXT,
     review_date DATE,
-    FOREIGN KEY (product_id) REFERENCES product(id),
-    FOREIGN KEY (user_id) REFERENCES user(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );

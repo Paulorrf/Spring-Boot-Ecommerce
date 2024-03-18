@@ -47,6 +47,7 @@ public class SecurityConfig {
                                                                 Authentication authentication) throws IOException, ServletException {
 
                                 CustomOAuth2User oauthUser = (CustomOAuth2User) authentication.getPrincipal();
+                                
 
                                 String github_id = oauthUser.getAttributes().get("id").toString();
 

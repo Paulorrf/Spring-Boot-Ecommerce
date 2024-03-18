@@ -14,6 +14,11 @@ public class HomeController {
         return "succeesssss";
     }
 
+    @GetMapping("/userinfo")
+    public String usuarioinfo() {
+        return "succeesssss";
+    }
+
     @GetMapping("/protected")
     public String homeProtected(OAuth2AuthenticationToken authentication) {
         System.out.println(authentication.getAuthorities());

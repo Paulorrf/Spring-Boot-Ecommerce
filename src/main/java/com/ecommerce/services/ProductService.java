@@ -52,7 +52,7 @@ public class ProductService {
         if(id != null) {
             productRepository.deleteById(id);
         }else {
-            throw new RuntimeException("Not possible to delete the category!");
+            throw new RuntimeException("Not possible to delete the product!");
         } 
         
     }

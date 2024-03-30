@@ -17,4 +17,10 @@ public class UserController {
         //System.out.println(principal.getAuthorities());
         return Collections.singletonMap("name", principal.getAttribute("name"));
     }
+
+    @GetMapping("/user/admin")
+    public String userAdmin() {
+        //System.out.println(principal.getAuthorities());
+        return "Admin rota";
+    }
 }

@@ -27,8 +27,9 @@ public class SecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/").permitAll();
+                    auth.anyRequest().permitAll();
                     //auth.requestMatchers(HttpMethod.GET, "/user/admin").hasRole("ADMIN");
-                    auth.anyRequest().authenticated();
+                    //auth.anyRequest().authenticated();
                 })
                 // .oauth2Login(Customizer.withDefaults())
                 .oauth2Login(Customizer.withDefaults())

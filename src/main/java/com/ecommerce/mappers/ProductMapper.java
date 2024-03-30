@@ -10,12 +10,12 @@ import com.ecommerce.models.Product;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    ProductDTO productToProductDto(Product category);
+    ProductDTO productToProductDto(Product product);
 
-    Product productDtoToProduct(ProductDTO categoryDTO);
+    Product productDtoToProduct(ProductDTO productDTO);
 
-    List<ProductDTO> listProductToProductDto(List<Product> category);
+    List<ProductDTO> listProductToProductDto(List<Product> product);
 
-    List<Product> listProductDtoToProduct(List<ProductDTO> categoryDTO);
+    List<Product> listProductDtoToProduct(List<ProductDTO> productDTO);
 
 }

@@ -40,7 +40,7 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
-    @PostMapping
+    @PostMapping()
     CategoryDTO create(@RequestBody CategoryDTO categoryDTO) {
         return categoryService.create(categoryDTO);
     }

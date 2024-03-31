@@ -25,22 +25,22 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @PostMapping
+    @PostMapping()
     public ReviewDTO create(@RequestBody ReviewDTO reviewDTO){
         return reviewService.create(reviewDTO);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ReviewDTO findById(@PathVariable Long id) {
         return reviewService.findById(id);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<ReviewDTO> findAll() {
         return reviewService.findAll();
     }
 
-    @DeleteMapping
+    @DeleteMapping()
     public void delete(@PathVariable Long id){
         reviewService.deleteById(id);
     }

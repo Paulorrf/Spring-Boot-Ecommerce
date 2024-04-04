@@ -50,10 +50,9 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(
                         authorizeConfig -> {
-                            authorizeConfig.requestMatchers("/public").permitAll();
-                            authorizeConfig.requestMatchers("/logout").permitAll();
-                            authorizeConfig.requestMatchers("/admin").hasRole("admin");
-                            authorizeConfig.requestMatchers("/usuario").hasRole("user");
+                            authorizeConfig.requestMatchers("/").permitAll();
+                            authorizeConfig.requestMatchers("/protected").hasRole("admin");
+                            authorizeConfig.requestMatchers("/userinfo").hasRole("user");
                             authorizeConfig.anyRequest().authenticated();
                         })
                 .oauth2Login(Customizer.withDefaults())

@@ -1,31 +1,37 @@
-# This is a simple .gitlab-ci.yml file for a Maven project
-
-# Define variables
-variables:
-  # Maven options
-  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-  # Maven CLI options
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version --no-transfer-progress -DinstallAtEnd=true -DdeployAtEnd=true"
-
-# Define stages
 stages:
-  - test
   - build
+  - test
 
-# Define cache paths
-cache:
-  paths:
-    - .m2/repository
+variables:
+  POSTGRES_DB: keycloak
+  POSTGRES_USER: keycloak
+  POSTGRES_PASSWORD: password
+  KEYCLOAK_ADMIN: admin
+  KEYCLOAK_ADMIN_PASSWORD: admin
 
-# Define jobs
-test:
-  stage: test
-  image: maven:latest
-  script:
-    - 'mvn $MAVEN_CLI_OPTS test'
+services:
+  - name: postgres:15.6
+    alias: postgres
+  - name: quay.io/keycloak/keycloak:23.0.7
+    alias: keycloak_web
 
-build:
+before_script:
+  - export KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak
+  - export KC_DB_USERNAME=keycloak
+  - export KC_DB_PASSWORD=password
+
+install_maven:
   stage: build
   image: maven:latest
   script:
-    - 'mvn $MAVEN_CLI_OPTS package'
+    - mvn --version
+
+build:
+  stage: build
+  script:
+    - mvn clean package
+
+test:
+  stage: test
+  script:
+    - mvn test

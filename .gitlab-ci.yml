@@ -1,37 +1,9 @@
-stages:
-  - build
-  - test
-
-variables:
-  POSTGRES_DB: keycloak
-  POSTGRES_USER: keycloak
-  POSTGRES_PASSWORD: password
-  KEYCLOAK_ADMIN: admin
-  KEYCLOAK_ADMIN_PASSWORD: admin
-
-services:
-  - name: postgres:15.6
-    alias: postgres
-  - name: quay.io/keycloak/keycloak:23.0.7
-    alias: keycloak_web
-
-before_script:
-  - export KC_DB_URL=jdbc:postgresql://postgres:5432/keycloak
-  - export KC_DB_USERNAME=keycloak
-  - export KC_DB_PASSWORD=password
-
-install_maven:
+build-job:
   stage: build
   image: maven:latest
   script:
-    - mvn --version
-
-build:
-  stage: build
-  script:
     - mvn clean package
-
-test:
-  stage: test
-  script:
-    - mvn test
+    - echo "Hello, $GITLAB_USER_LOGIN!"
+  artifacts:
+    paths:
+      - "build/"

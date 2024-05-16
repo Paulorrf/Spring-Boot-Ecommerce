@@ -1,0 +1,8 @@
+image: maven:latest  # Use a Maven image as a base
+
+before_script:
+  - mvn clean install -DskipTests=true  # Install dependencies
+
+test:
+  script:
+    - mvn test  # Run tests
